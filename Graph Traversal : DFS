@@ -1,0 +1,43 @@
+// Using Recursion : 
+
+private boolean dfs(int source, int destination, boolean vis[]) {
+		
+		if(source==destination) {
+			return true ; 
+		}
+		
+		vis[source] = true ; 
+		for(int i=0; i<adj[source].size(); i++) {
+			if(!vis[adj[source].get(i)]) {
+				//vis[adj[source].get(i)] = true ; 
+				if(dfs(adj[source].get(i), destination, vis)) {
+					return true ; 
+				}
+			}
+		}
+		
+		return false ; 
+	}
+  
+  // Using Stack : 
+  
+  private boolean dfsStack(int source, int destination) {
+		boolean vis[] = new boolean[adj.length] ; 
+		Stack<Integer> obj = new Stack<Integer>() ; 
+		obj.push(source) ; 
+		
+		while(!obj.isEmpty()) {
+			int y= obj.pop(); 
+			if(y==destination) {
+				return true ; 
+			}
+			for(int i=0; i<adj[y].size(); i++) {
+				if(!vis[adj[y].get(i)]) {
+					vis[adj[y].get(i)] = true ; 
+					obj.push(adj[y].get(i)) ; 
+				}
+			}
+		}
+		
+		return false ;
+	}
