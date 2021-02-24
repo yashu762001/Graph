@@ -1,0 +1,39 @@
+private int bfs(int source, int destination) {
+		
+		boolean vis[] = new boolean[adj.length] ; 
+		vis[source] = true; 
+		int parent[] = new int[adj.length]; 
+		parent[source] = -1 ; 
+		Queue<Integer> obj = new LinkedList<Integer>() ; 
+		obj.add(source) ; 
+		
+		
+		while(obj.size()!=0) {
+			int y = obj.poll() ; 
+			if(y==destination) {
+				break ; 
+			}
+			
+			for(int i=0; i<adj[y].size(); i++) {
+				if(!vis[adj[y].get(i)]) {
+					obj.add(adj[y].get(i)) ; 
+					parent[adj[y].get(i)] = y ;
+					vis[adj[y].get(i)] = true ; 
+				}
+			}
+			
+		}
+		
+		int curr = destination ; 
+		int count = 0 ; 
+		while(parent[curr]!=-1) {
+			System.out.print(curr + " <- ");
+			curr = parent[curr] ; 
+			count++ ; 
+		}
+		
+		System.out.print(curr);
+		System.out.println("") ; 
+		
+		return count  ;
+	}
